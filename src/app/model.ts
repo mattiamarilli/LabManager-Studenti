@@ -1,4 +1,4 @@
-export class Studente {
+export class AuthUser {
     id:number;
     nome:string
     cognome:string;
