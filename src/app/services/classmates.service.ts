@@ -20,13 +20,13 @@ export class ClassmatesService {
   useTool(id_attrezzo:number){
     let headers = new HttpHeaders({
     });
-    return this.http.post(this.apiURL + `/user/utensile`,{ id_attrezzo}, { headers: headers })
+    return this.http.post(this.apiURL + `/user/utensile`, JSON.stringify(id_attrezzo), { headers: headers })
   }
 
-  useToolByCategory(id_attrezzo:number){
+  useToolByCategory(id_categoria:number){
     let headers = new HttpHeaders({
     });
-    return this.http.post(this.apiURL + `/user/categoria`,{ id_attrezzo}, { headers: headers })
+    return this.http.post(this.apiURL + `/user/categoria`, JSON.stringify(id_categoria), { headers: headers })
   }
 
   getInUseTools(): Observable<Utensile[]>{

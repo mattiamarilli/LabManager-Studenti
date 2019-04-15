@@ -21,7 +21,7 @@ export class GroupService {
   setMembro(id_studente:number){
     let headers = new HttpHeaders({
     });
-    return this.http.post(this.apiURL + `/user/gruppo`,{ id_studente}, { headers: headers })
+    return this.http.post(this.apiURL + `/user/gruppo`,JSON.stringify(id_studente), { headers: headers })
   }
 
   exitgroup(){
