@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { QrReaderComponent } from './qr-reader/qr-reader.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
+import {HttpClientModule} from '@angular/common/http'
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MainNavComponent } from './main-nav/main-nav.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
