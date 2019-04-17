@@ -29,7 +29,7 @@ export class QrReaderComponent implements OnInit {
     this.qrService.scanFile(file).subscribe(data => {
       this.output = data
        if(data != null)
-        this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard']);
     });
   }
 
