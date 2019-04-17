@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {GroupService} from '../services/group.service'
-import {ClassmatesService} from '../services/classmates.service'
-
-import {Membro,Utensile} from '../model'
 
 @Component({
   selector: 'app-dashboard',
@@ -11,15 +7,9 @@ import {Membro,Utensile} from '../model'
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private groupService:GroupService,private classmatesService:ClassmatesService) { }
-
-  membriGruppo:Membro[];
-  inUseTools:Utensile[]
+  constructor() { }
 
   ngOnInit() {
-
-    //this.groupService.getMembri().subscribe((data:Membro[]) =>this.membriGruppo = data)
-    //this.classmatesService.getInUseTools().subscribe((data:Utensile[])=>this.inUseTools = data)     
   }
 
 }
