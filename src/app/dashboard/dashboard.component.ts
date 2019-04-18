@@ -13,7 +13,12 @@ export class DashboardComponent implements OnInit {
 
   compagni:Membro[];
   utensiliInUso:Utensile[];
-  
+
+  updateToolAndMates(){
+    this.groupService.getMembri().subscribe((data:Membro[])=>this.compagni = data);
+    this.classmateService.getInUseTools().subscribe((data:Utensile[])=>this.utensiliInUso = data);
+  }
+
   ngOnInit() {
       this.groupService.getMembri().subscribe((data:Membro[])=>this.compagni = data);
       this.classmateService.getInUseTools().subscribe((data:Utensile[])=>this.utensiliInUso = data);

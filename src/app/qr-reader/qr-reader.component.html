@@ -1,5 +1,9 @@
-<div>
-    <input type="file" name="input" id="input"  (change)="onFileChange($event)">
-
-    <p>{{output}}</p>
+<header></header>
+<div id="page">
+	<div id="input">
+		<button ngf-select ng-model="picFile" accept="image/*">Scansiona</button>
+	</div>
+	<div id="output">
+		<span>{{output}}</span>
+	</div>
 </div>
