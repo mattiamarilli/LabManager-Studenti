@@ -16,7 +16,7 @@ import { StringifyOptions } from 'querystring';
 export class QrReaderComponent implements OnInit {
   
   output: string;
-  picFile:string;
+
   constructor(private router: Router,private qrService: QrService) {
 
   }
@@ -26,8 +26,8 @@ export class QrReaderComponent implements OnInit {
   }
 
   onFileChange(event) {
-
-    this.qrService.scanFile(this.picFile).subscribe(data => {
+    const file = event.target.files[0];
+    this.qrService.scanFile(file).subscribe(data => {
       this.output = data
        if(data != null)
           this.router.navigate(['/dashboard']);

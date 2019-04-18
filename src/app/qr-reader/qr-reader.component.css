@@ -50,10 +50,6 @@ header{
 	color: #4CAF50;
 }
 
-#realInputFile{
-  display: none;
-  opacity: 0;
-}
 
  #output{
 	text-align: left;
