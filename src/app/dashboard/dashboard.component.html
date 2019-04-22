@@ -1,31 +1,10 @@
 <app-main-nav></app-main-nav>
 
-<div>
+<div class="container">
   
-  <h3 class="title">Lista membri del gruppo</h3>
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Cognome</th>
-                <th>Classe</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let studenti of compagni">
-                <td>{{studenti.id}}</td>
-                <td>{{studenti.nome}}</td>
-                <td>{{studenti.cognome}}</td>
-                <td>{{studenti.classe}}</td>
-
-            </tr>
-        </tbody>
-    </table>
-  <div class="ml-2 mr-2">
-    <h3 class="title">Lista degli Utensili</h3>
-    
-    <table class="table table-striped table-bordered">
+  <h3 class="title"><span>Lista degli Utensili</span></h3>
+  <div class="_table">
+    <table>
         <thead>
             <tr>
                 <th>Id</th>
@@ -44,9 +23,38 @@
             </tr> -->
         </tbody>
     </table>
+	<hr>
+  <div class="_table">
     <div id="input">
         <div id="inputFile"><span (click)="uploader.click()" >Scansiona un utensile</span></div>
         <input style="display: none" #uploader id="realInputFile" type="file" name="input" id="input" (change)="onFileChange($event)">
       </div>
   </div>
+  </div>
+  
+  <hr>
+  
+  <h3 class="title"><span>Lista membri del gruppo</span></h3>
+  <div class="_table">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Classe</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let studenti of compagni">
+                <td>{{studenti.id}}</td>
+                <td>{{studenti.nome}}</td>
+                <td>{{studenti.cognome}}</td>
+                <td>{{studenti.classe}}</td>
+
+            </tr>
+        </tbody>
+    </table>
+   </div>
+
 </div>
