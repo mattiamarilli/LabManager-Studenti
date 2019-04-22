@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
 
   compagni: Membro[];
   utensiliInUso: Utensile[];
-  output: string;
+
 
   updateToolAndMates(){
     this.groupService.getMembri().subscribe((data: Membro[])=>this.compagni = data);
@@ -37,20 +37,12 @@ export class DashboardComponent implements OnInit {
   onFileChange(event) {
     const file = event.target.files[0];
     this.qrService.scanFile(file).subscribe(data => {
-      this.output = data;
+      this.classmateService.useTool(+data);
+      this.updateToolAndMates();
     });
-  }
 
-  exitGroup()
-  {
-    this.qrService.logout();
-    this.router.navigate(['/scan']);
-  }
-
-  logout(){
-    this.qrService.logout();
-    this.authenticationService.logout();
-    this.router.navigate(['/login']);
     
   }
+
+
 }
