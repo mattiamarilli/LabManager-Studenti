@@ -3,6 +3,8 @@ import {ClassmatesService} from '../services/classmates.service';
 import {Membro, Utensile} from '../model'
 import {GroupService} from '../services/group.service'
 import { QrService } from '../services/qr.service';
+import {AuthenticationService} from '../services/authentication.service'
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,11 +12,17 @@ import { QrService } from '../services/qr.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private classmateService: ClassmatesService,private groupService: GroupService, private qrService: QrService) { }
+  constructor(
+    private classmateService: ClassmatesService,
+    private groupService: GroupService, 
+    private qrService: QrService,
+    private authenticationService:AuthenticationService,
+    private router: Router
+    ) { }
 
   compagni: Membro[];
   utensiliInUso: Utensile[];
-  output: string;
+
 
   updateToolAndMates(){
     this.groupService.getMembri().subscribe((data: Membro[])=>this.compagni = data);
@@ -29,8 +37,12 @@ export class DashboardComponent implements OnInit {
   onFileChange(event) {
     const file = event.target.files[0];
     this.qrService.scanFile(file).subscribe(data => {
-      this.output = data;
+      this.classmateService.useTool(+data);
+      this.updateToolAndMates();
     });
+
+    
   }
+
 
 }
