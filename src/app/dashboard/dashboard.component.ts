@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ClassmatesService} from '../services/classmates.service';
-import {Membro, Utensile} from '../model'
+import {Membro, Utensile, AuthUser} from '../model'
 import {GroupService} from '../services/group.service'
 import { QrService } from '../services/qr.service';
 import {AuthenticationService} from '../services/authentication.service'
@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
 
   compagni: Membro[];
   utensiliInUso: Utensile[];
-
+  id_gruppo:string;
 
   updateToolAndMates(){
     this.groupService.getMembri().subscribe((data: Membro[])=>this.compagni = data);
@@ -30,7 +30,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.groupService.getMembri().subscribe((data:Membro[])=>this.compagni = data);
+      this.id_gruppo = this.qrService.currentGroupValue();
+      this.groupService.getMembri(id_gruppo).subscribe((data:Membro[])=>this.compagni = data);
       this.classmateService.getInUseTools().subscribe((data:Utensile[])=>this.utensiliInUso = data);
   }
 

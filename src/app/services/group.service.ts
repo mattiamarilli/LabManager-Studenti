@@ -13,10 +13,10 @@ export class GroupService {
 
   apiURL:string;
 
-  getMembri(): Observable<Membro[]>{
+  getMembri(id_gruppo:string): Observable<Membro[]>{
     let headers = new HttpHeaders({
     });
-    return this.http.get<Membro[]>(environment.apiUrl + '/user/gruppo');
+    return this.http.get<Membro[]>(environment.apiUrl + '/user/gruppo?id_gruppo=' + id_gruppo);
 
   }
 
