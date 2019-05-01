@@ -31,6 +31,7 @@ export class QrReaderComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.authService.currentUserValue();
+    console.log(this.currentUser)
   }
 
   onFileChange(event) {
