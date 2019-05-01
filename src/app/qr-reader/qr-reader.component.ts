@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 import { StringifyOptions } from 'querystring';
 import {AuthenticationService} from '../services/authentication.service'
 import { GroupService } from '../services/group.service'
+import { JoinGroup } from '../model_body';
+import { AuthUser } from '../model';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +20,8 @@ import { GroupService } from '../services/group.service'
 export class QrReaderComponent implements OnInit {
   
   output: string;
-  currentUser;
+  joingroup:JoinGroup;
+  currentUser:AuthUser;
   constructor(private router: Router,
     private qrService: QrService, 
     private authService:AuthenticationService,
@@ -35,7 +38,10 @@ export class QrReaderComponent implements OnInit {
     this.qrService.scanFile(file).subscribe(data => {
       this.output = data
        if(data != null)
-          this.router.navigate(['/dashboard']);
+          this.joingroup.id_gruppo = +this.output;
+          this.joingroup.id_studente = this.currentUser.id;
+          console.log(this.joingroup);
+          //this.router.navigate(['/dashboard']);
     });
   }
 
