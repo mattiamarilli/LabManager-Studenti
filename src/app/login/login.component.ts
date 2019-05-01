@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
       if(data == true)
         {
           console.log('ciao');
-          this.router.navigate(['/home']);
+          this.router.navigate(['/scan']);
       }
 		}
     );;
