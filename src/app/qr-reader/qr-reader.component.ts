@@ -41,8 +41,12 @@ export class QrReaderComponent implements OnInit {
        if(data != null)
           this.joingroup.id_gruppo = +this.output;
           this.joingroup.id_studente = this.currentUser[0].id;
-          this.groupService.setMembro(this.joingroup).subscribe()
-          //this.router.navigate(['/dashboard']);
+          this.groupService.setMembro(this.joingroup).subscribe(data =>
+            {
+              this.router.navigate(['/dashboard']);
+            }
+          )
+          
     });
   }
 
