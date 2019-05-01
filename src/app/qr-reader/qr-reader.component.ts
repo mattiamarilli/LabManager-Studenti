@@ -18,12 +18,12 @@ import { AuthUser } from '../model';
   encapsulation: ViewEncapsulation.None,
 })
 export class QrReaderComponent implements OnInit {
-  
+
   output: string;
   joingroup:JoinGroup = new JoinGroup();
   currentUser:AuthUser;
   constructor(private router: Router,
-    private qrService: QrService, 
+    private qrService: QrService,
     private authService:AuthenticationService,
     private groupService:GroupService) {
 
@@ -31,7 +31,7 @@ export class QrReaderComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.authService.currentUserValue();
-    console.log(this.currentUser)
+    console.log(this.currentUser[0].id)
   }
 
   onFileChange(event) {
@@ -40,7 +40,7 @@ export class QrReaderComponent implements OnInit {
       this.output = data
        if(data != null)
           this.joingroup.id_gruppo = +this.output;
-          this.joingroup.id_studente = this.currentUser.id;
+          this.joingroup.id_studente = this.currentUser[0].id;
           console.log(this.joingroup);
           //this.router.navigate(['/dashboard']);
     });
