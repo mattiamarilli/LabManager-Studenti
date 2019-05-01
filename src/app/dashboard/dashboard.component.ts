@@ -25,13 +25,13 @@ export class DashboardComponent implements OnInit {
   id_gruppo:string;
 
   updateToolAndMates(){
-    this.groupService.getMembri().subscribe((data: Membro[])=>this.compagni = data);
+    this.groupService.getMembri(this.id_gruppo).subscribe((data: Membro[])=>this.compagni = data);
     this.classmateService.getInUseTools().subscribe((data:Utensile[])=>this.utensiliInUso = data);
   }
 
   ngOnInit() {
       this.id_gruppo = this.qrService.currentGroupValue();
-      this.groupService.getMembri(id_gruppo).subscribe((data:Membro[])=>this.compagni = data);
+      this.groupService.getMembri(this.id_gruppo).subscribe((data:Membro[])=>this.compagni = data);
       this.classmateService.getInUseTools().subscribe((data:Utensile[])=>this.utensiliInUso = data);
   }
 
