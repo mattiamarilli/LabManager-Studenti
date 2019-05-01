@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import { environment } from '../../environments/environment';
 import {AuthUser} from '../model'
 import {Auth} from '../model_body'
 
@@ -24,7 +24,7 @@ export class AuthenticationService {
     login(auth:Auth): Observable<boolean> {
         let headers = new HttpHeaders({
         });
-        return this.http.post<AuthUser>(this.apiURL + `/user/auth`, { auth }, { headers: headers }).pipe(
+        return this.http.post<AuthUser>(`/user/auth`, JSON.stringify(auth), { headers: headers }).pipe(
             map((user: AuthUser ) => {
 
                 console.log(user);

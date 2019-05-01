@@ -4,7 +4,7 @@ export class AuthUser {
     cognome:string;
     id_classe:number;
     classe:number;
-    id_gruppo;
+    id_gruppo:number;
 
 }
 

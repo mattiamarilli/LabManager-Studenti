@@ -28,7 +28,7 @@
     <div id="input">
         <div id="inputFile"><span (click)="uploader.click()" >Scansiona un utensile</span></div>
         <input style="display: none" #uploader id="realInputFile" type="file" name="input" id="input" (change)="onFileChange($event)">
-      </div>
+    </div>
   </div>
   </div>
   
@@ -55,6 +55,13 @@
             </tr>
         </tbody>
     </table>
+    <hr>
+    <div class="_table">
+      <div id="input">
+          <div id="inputFile"><span (click)="updateToolAndMates()" >Aggiorna</span></div>
+          
+      </div>
+    </div>
    </div>
 
 </div>
