@@ -4,6 +4,8 @@ import { QrService } from '../services/qr.service';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { StringifyOptions } from 'querystring';
+import {AuthenticationService} from '../services/authentication.service'
+import { GroupService } from '../services/group.service'
 @Injectable({
   providedIn: 'root'
 })
@@ -16,13 +18,16 @@ import { StringifyOptions } from 'querystring';
 export class QrReaderComponent implements OnInit {
   
   output: string;
-
-  constructor(private router: Router,private qrService: QrService) {
+  currentUser;
+  constructor(private router: Router,
+    private qrService: QrService, 
+    private authService:AuthenticationService,
+    private groupService:GroupService) {
 
   }
 
   ngOnInit() {
-      
+    this.currentUser = this.authService.currentUserValue();
   }
 
   onFileChange(event) {

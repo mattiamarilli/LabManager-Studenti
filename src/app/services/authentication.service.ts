@@ -24,7 +24,7 @@ export class AuthenticationService {
     login(auth:Auth): Observable<boolean> {
         let headers = new HttpHeaders({
         });
-        return this.http.post<AuthUser>(`/user/auth`, JSON.stringify(auth), { headers: headers }).pipe(
+        return this.http.post<AuthUser>("http://labmanagerapi.ddns.net/user/auth", JSON.stringify(auth), { headers: headers }).pipe(
             map((user: AuthUser ) => {
 
                 console.log(user);

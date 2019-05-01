@@ -5,7 +5,6 @@ export class AuthUser {
     id_classe:number;
     classe:number;
     id_gruppo:number;
-
 }
 
 export class Membro{
