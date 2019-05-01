@@ -20,7 +20,7 @@ import { AuthUser } from '../model';
 export class QrReaderComponent implements OnInit {
   
   output: string;
-  joingroup:JoinGroup;
+  joingroup:JoinGroup = new JoinGroup();
   currentUser:AuthUser;
   constructor(private router: Router,
     private qrService: QrService, 
