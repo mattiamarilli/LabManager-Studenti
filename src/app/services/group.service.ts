@@ -3,6 +3,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {Membro} from '../model'
 import { environment } from '../../environments/environment';
+import { JoinGroup } from '../model_body';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,10 +20,10 @@ export class GroupService {
 
   }
 
-  setMembro(id_studente:number){
+  setMembro(joinGroup:JoinGroup){
     let headers = new HttpHeaders({
     });
-    return this.http.post(environment.apiUrl + `/user/gruppo`,JSON.stringify(id_studente), { headers: headers })
+    return this.http.post(environment.apiUrl + `/user/gruppo`,JSON.stringify(joinGroup), { headers: headers })
   }
 
   exitgroup(){
