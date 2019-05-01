@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
       this.id_gruppo = this.qrService.currentGroupValue();
+      console.log(this.id_gruppo)
       this.groupService.getMembri(this.id_gruppo).subscribe((data:Membro[])=>this.compagni = data);
       this.classmateService.getInUseTools().subscribe((data:Utensile[])=>this.utensiliInUso = data);
   }
