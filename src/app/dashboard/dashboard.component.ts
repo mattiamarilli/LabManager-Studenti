@@ -14,36 +14,48 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private classmateService: ClassmatesService,
-    private groupService: GroupService, 
+    private groupService: GroupService,
     private qrService: QrService,
-    private authenticationService:AuthenticationService,
     private router: Router
     ) { }
 
   compagni: Membro[];
   utensiliInUso: Utensile[];
-  id_gruppo:string;
 
+  object:any;
   updateToolAndMates(){
-    this.groupService.getMembri(this.id_gruppo).subscribe((data: Membro[])=>this.compagni = data);
+    this.groupService.getMembri().subscribe((data: Membro[]) => this.compagni = data);
     this.classmateService.getInUseTools().subscribe((data:Utensile[])=>this.utensiliInUso = data);
   }
 
   ngOnInit() {
-      this.id_gruppo = this.qrService.currentGroupValue();
-      console.log(this.id_gruppo)
-      this.groupService.getMembri(this.id_gruppo).subscribe((data:Membro[])=>this.compagni = data);
+      this.groupService.getMembri().subscribe((data: Membro[]) => this.compagni = data);
       this.classmateService.getInUseTools().subscribe((data:Utensile[])=>this.utensiliInUso = data);
   }
 
   onFileChange(event) {
     const file = event.target.files[0];
     this.qrService.scanFile(file).subscribe(data => {
-      this.classmateService.useTool(+data);
-      this.updateToolAndMates();
+     this.object = JSON.parse(data);
+     if (this.object.type === 'category') {
+       this.classmateService.useToolByCategory(this.object.id).subscribe();
+     } else {
+       this.classmateService.useTool(this.object.id).subscribe();
+     }
     });
+  }
 
-    
+  restituisci(id_utensile: number)
+  {
+    if(confirm('Sei sicuro di volerlo restituire'))
+
+    {
+
+      console.log('ciao');
+      this.classmateService.releaseTool(id_utensile).subscribe();
+      this.updateToolAndMates();
+    }
+
   }
 
 

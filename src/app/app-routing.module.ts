@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'login',component:LoginComponent},
   { path: 'scan',component:QrReaderComponent,canActivate: [AuthGuard]},
   { path: '', redirectTo: '/scan', pathMatch: 'full'},
-  { path: 'dashboard', component: DashboardComponent,canActivate: [QrGuard]},
+  { path: 'dashboard', component: DashboardComponent,/*canActivate: [QrGuard]*/},
 ];
 
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {Membro} from '../model'
+import {AuthUser, Membro} from '../model';
 import { environment } from '../../environments/environment';
-import { JoinGroup } from '../model_body';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,18 +12,22 @@ export class GroupService {
   constructor(private http: HttpClient) { }
 
   apiURL:string;
+  user: AuthUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
-  getMembri(id_gruppo:string): Observable<Membro[]>{
+  getMembri(): Observable<Membro[]>{
     let headers = new HttpHeaders({
+      'token': this.user.token,
     });
-    return this.http.get<Membro[]>(environment.apiUrl + '/user/gruppo?id_gruppo=' + id_gruppo);
+    return this.http.get<Membro[]>(environment.apiUrl + '/user/gruppo',{headers});
 
   }
 
-  setMembro(joinGroup:JoinGroup){
+  setMembro(id_membro: number){
+
     let headers = new HttpHeaders({
+      'token': this.user.token,
     });
-    return this.http.post(environment.apiUrl + `/user/gruppo`,JSON.stringify(joinGroup), { headers: headers })
+    return this.http.post(environment.apiUrl + `/user/gruppo`, JSON.stringify({id_studente : id_membro}), { headers: headers })
   }
 
   exitgroup(){

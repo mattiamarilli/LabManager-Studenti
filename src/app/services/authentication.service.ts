@@ -3,17 +3,19 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import {AuthUser} from '../model'
+import {AuthUser} from '../model';
 import {Auth} from '../model_body'
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<AuthUser>;
     public currentUser: Observable<AuthUser>;
-    apiURL:string = '';
+
+
+  user: AuthUser;
 
     constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<AuthUser>(JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUserSubject = new BehaviorSubject<AuthUser>(JSON.parse(sessionStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
@@ -21,28 +23,42 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(auth:Auth): Observable<boolean> {
+    login(auth:Auth): Observable<number> {
         let headers = new HttpHeaders({
         });
-        return this.http.post<AuthUser>("http://labmanagerapi.ddns.net/user/auth", JSON.stringify(auth), { headers: headers }).pipe(
-            map((user: AuthUser ) => {
-
-                console.log(user);
-                if (user) {
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.currentUserSubject.next(user);
-
-                    return true;
+        // @ts-ignore
+      return this.http.post<AuthUser>(environment.apiUrl + "/user/auth", JSON.stringify(auth), { headers: headers}).pipe(
+            map((user: AuthUser) => {
+             if (user.id) {
+                sessionStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+                if(user.id_gruppo) {
+                  return 1;
+                } else {
+                  return 2;
                 }
+              }
 
-                return false;
+              else if(user.code === 403)
+                  return 3;
+              else if(user.code === 401)
+                return 4;
+
+
             })
         )
     }
 
+    renew(): Observable<AuthUser>{
+      this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+      const headers = new HttpHeaders({
+        'token': this.user.token,
+      });
+      return this.http.post<AuthUser>(environment.apiUrl + '/user/renew', { headers: headers})
+    }
     logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+        sessionStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
 }

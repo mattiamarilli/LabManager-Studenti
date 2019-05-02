@@ -5,18 +5,20 @@ export class AuthUser {
     id_classe:number;
     classe:number;
     id_gruppo:number;
+    token:string;
+    message?:string;
+    code?:number;
 }
 
 export class Membro{
-    id:number;
+    id_studente:number;
     nome:string;
     cognome:string;
 }
 
 export class Utensile{
-    id_Utensile:number;
+    id_utensile:number;
     nome:string;
-    segnala:boolean;
     id_categoria:number;
     categoria:string;
 }

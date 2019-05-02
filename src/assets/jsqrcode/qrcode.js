@@ -44,7 +44,7 @@ qrcode.vidSuccess = function (stream)
     qrcode.gUM=true;
     
     qrcode.canvas_qr2 = document.createElement('canvas');
-    qrcode.canvas_qr2.id = "qr-canvas";
+    qrcode.canvas_qr2.id_studente = "qr-canvas";
     qrcode.qrcontext2 = qrcode.canvas_qr2.getContext('2d');
     qrcode.canvas_qr2.width = qrcode.video.videoWidth;
     qrcode.canvas_qr2.height = qrcode.video.videoHeight;
@@ -106,7 +106,7 @@ qrcode.setWebcam = function(videoId)
                     options=[{'sourceId': device.deviceId}] ;
                 }
                 console.log(device.kind + ": " + device.label +
-                            " id = " + device.deviceId);
+                            " id_studente = " + device.deviceId);
               });
             })
             

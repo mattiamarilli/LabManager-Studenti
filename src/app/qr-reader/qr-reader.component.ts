@@ -7,7 +7,8 @@ import { StringifyOptions } from 'querystring';
 import {AuthenticationService} from '../services/authentication.service'
 import { GroupService } from '../services/group.service'
 import { JoinGroup } from '../model_body';
-import { AuthUser } from '../model';
+import {AuthUser, Membro} from '../model';
+import {ClassmatesService} from '../services/classmates.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,35 +21,28 @@ import { AuthUser } from '../model';
 export class QrReaderComponent implements OnInit {
 
   output: string;
-  joingroup:JoinGroup = new JoinGroup();
-  currentUser:AuthUser;
-  constructor(private router: Router,
-    private qrService: QrService,
-    private authService:AuthenticationService,
-    private groupService:GroupService) {
-
-  }
+  membri: Membro[];
+  user:AuthUser;
+  constructor(private router: Router, 
+              private classmatesService: ClassmatesService ,
+              private groupService: GroupService) {}
 
   ngOnInit() {
-    this.currentUser = this.authService.currentUserValue();
-    console.log(this.currentUser[0].id)
+    this.user = JSON.parse(sessionStorage.getItem('currentUser'))
+    if (this.user.id_gruppo)
+      this.router.navigate(['/dashboard']);
+    this.classmatesService.getCompagni().subscribe((data: Membro[]) => this.membri = data);
   }
 
-  onFileChange(event) {
-    const file = event.target.files[0];
-    this.qrService.scanFile(file).subscribe(data => {
-      this.output = data
-       if(data != null)
-          this.joingroup.id_gruppo = +this.output;
-          this.joingroup.id_studente = this.currentUser[0].id;
-          this.groupService.setMembro(this.joingroup).subscribe(data =>
-            {
-              this.router.navigate(['/dashboard']);
-            }
-          )
-          
-    });
+  join(id_studente:number)
+  {
+    this.groupService.setMembro(id_studente).subscribe((user:AuthUser)=>
+      {
+        sessionStorage.removeItem('currentUser');
+        sessionStorage.setItem('currentUser', JSON.stringify(user));
+        this.router.navigate(['/dashboard']);
+      }
+    );
   }
-
 
 }

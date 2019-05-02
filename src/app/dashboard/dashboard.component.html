@@ -7,20 +7,15 @@
     <table>
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nome</th>
+                <th>Categoria</th>
             </tr>
         </thead>
         <tbody>
-            <!-- <tr *ngFor="let studenti of elencoStudenti">
-                <td>{{studenti.id}}</td>
-                <td>{{studenti.nome}}</td>
-                <td>{{studenti.cognome}}</td>
-                <td>{{studenti.id_classe}}</td>
-                <td>{{studenti.classe}}</td>
-                <td>{{studenti.id_gruppo}}</td>
-                <td>{{studenti.username}}</td>
-            </tr> -->
+            <tr *ngFor="let utensile of utensiliInUso" (click)="restituisci(utensile.id_utensile)">
+                <td>{{utensile.nome}}</td>
+              <td>{{utensile.categoria}}</td>
+            </tr>
         </tbody>
     </table>
 	<hr>
@@ -39,19 +34,14 @@
     <table>
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nome</th>
                 <th>Cognome</th>
-                <th>Classe</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let studenti of compagni">
-                <td>{{studenti.id}}</td>
                 <td>{{studenti.nome}}</td>
                 <td>{{studenti.cognome}}</td>
-                <td>{{studenti.classe}}</td>
-
             </tr>
         </tbody>
     </table>

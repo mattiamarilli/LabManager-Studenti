@@ -1,9 +1,24 @@
 <header></header>
 
+<div class="container">
 
-<div id="page">
-	<div id="input">
-		<div id="inputFile"><span (click)="uploader.click()" >Scansiona</span></div>
-		<input style="display: none" #uploader id="realInputFile" type="file" name="input" id="input" (change)="onFileChange($event)">
-	</div>
+  <h3 class="title"><span>Membri della classe</span></h3>
+  <div class="_table">
+    <table>
+      <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Cognome</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let membro of membri" (click)="join(membro.id_studente)">
+        <th>{{membro.nome}}</th>
+        <th>{{membro.cognome}}</th>
+      </tr>
+      </tbody>
+    </table>
+    <hr>
+  </div>
+
 </div>

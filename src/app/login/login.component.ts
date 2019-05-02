@@ -15,12 +15,17 @@ export class LoginComponent implements OnInit {
   login(){
     state: RouterStateSnapshot;
   
-    this.authService.login(this.auth).subscribe((data: boolean ) => {
-      if(data == true)
-        {
-          console.log('ciao');
+    this.authService.login(this.auth).subscribe((data: number ) => {
+      if(data === 1)
+          this.router.navigate(['/dashboard']);
+        if(data === 2)
           this.router.navigate(['/scan']);
-      }
+      else if(data === 3)
+        alert("Classe non abilitata");
+      else if(data === 4)
+        alert('Credenziali non corrette');
+
+      
 		}
     );;
   }
