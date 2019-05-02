@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
     private classmateService: ClassmatesService,
     private groupService: GroupService,
     private qrService: QrService,
+    private authenticationService:AuthenticationService,
     private router: Router
     ) { }
 
@@ -38,9 +39,29 @@ export class DashboardComponent implements OnInit {
     this.qrService.scanFile(file).subscribe(data => {
      this.object = JSON.parse(data);
      if (this.object.type === 'category') {
-       this.classmateService.useToolByCategory(this.object.id).subscribe();
+       console.log(this.object.id)
+       this.classmateService.useToolByCategory(this.object.id).subscribe((done: boolean) =>
+         {
+           if(done === true) {
+             alert('Oggetto acquisito');
+             this.updateToolAndMates();
+           } else {
+             alert('Oggetto non disponibile');
+           }
+         }
+       );
      } else {
-       this.classmateService.useTool(this.object.id).subscribe();
+       console.log('ciao')
+       this.classmateService.useTool(this.object.id).subscribe((done: boolean) =>
+         {
+           if(done === true) {
+             alert('Oggetto acquisito');
+             this.updateToolAndMates();
+           } else {
+             alert('Oggetto non disponibile');
+           }
+         }
+       );
      }
     });
   }
@@ -52,10 +73,27 @@ export class DashboardComponent implements OnInit {
     {
 
       console.log('ciao');
-      this.classmateService.releaseTool(id_utensile).subscribe();
-      this.updateToolAndMates();
+      this.classmateService.releaseTool(id_utensile).subscribe(() =>  this.updateToolAndMates());
+
     }
 
+  }
+
+  exitGroup()
+  {
+    this.groupService.exitgroup().subscribe();
+    /*this.authenticationService.renew().subscribe((data: AuthUser) => {
+
+        this.user = data;
+        //console.log(this.user);
+        sessionStorage.removeItem('currentUser');
+        sessionStorage.setItem('currentUser', JSON.stringify(this.user));
+        console.log(  sessionStorage.getItem('currentUser'))
+        // this.router.navigate(['/scan']);
+      }
+    );
+
+    */
   }
 
 

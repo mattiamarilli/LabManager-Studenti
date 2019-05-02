@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import {AuthUser, Membro} from '../model';
 import {Utensile} from '../model'
 import { environment } from '../../environments/environment';
+import {map} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,19 +21,36 @@ export class ClassmatesService {
     return this.http.get<Membro[]>(environment.apiUrl + '/user/compagno',{ headers: headers});
   }
 
-  useTool(id_attrezzo:number){
+  useTool(id_utensile:number): Observable<boolean>{
+    console.log(id_utensile)
     let headers = new HttpHeaders({
       'token': this.user.token,
     });
-    return this.http.post(environment.apiUrl + `/user/utensile`, JSON.stringify({id_attrezzo}), { headers: headers })
+    return this.http.post(environment.apiUrl + `/user/utensile`, JSON.stringify({id_utensile}), { headers: headers }).pipe(
+      map((response: any) =>
+      {
+        if(response.code === 200)
+          return true;
+        else
+          return false;
+      }));
   }
 
   useToolByCategory(id_categoria:number){
     let headers = new HttpHeaders({
       'token': this.user.token,
     });
-    return this.http.post(environment.apiUrl + `/user/categoria`, JSON.stringify({id_categoria}), { headers: headers })
+    return this.http.post(environment.apiUrl + `/user/categoria`, JSON.stringify({id_categoria}), { headers: headers }).pipe(
+      map((response: any) =>
+      {
+        if(response.code === 200)
+          return true;
+        else
+          return false;
+      }));
   }
+
+
 
   getInUseTools(): Observable<Utensile[]>{
     let headers = new HttpHeaders({

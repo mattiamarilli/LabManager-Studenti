@@ -39,7 +39,7 @@ export class QrService {
                 {
                     localStorage.setItem('currentGroup', JSON.stringify(qrcode.decode(data)));
                     this.currentGroupSubject.next(qrcode.decode(data));
-                    console.log(localStorage.getItem('currentGroup'))
+
                     this.scannedForGroup = true;
                 }
             qrcode.decode(data);

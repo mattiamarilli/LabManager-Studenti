@@ -32,6 +32,7 @@ export class GroupService {
 
   exitgroup(){
     let headers = new HttpHeaders({
+      'token': this.user.token,
     });
     return this.http.delete(environment.apiUrl + `/user/gruppo`, { headers: headers })
   }

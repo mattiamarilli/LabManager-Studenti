@@ -3,6 +3,8 @@ import { QrService } from '../services/qr.service';
 import {AuthenticationService} from '../services/authentication.service'
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { from } from 'rxjs';
+import {GroupService} from '../services/group.service';
+import {AuthUser} from '../model';
 
 @Component({
   selector: 'app-main-nav',
@@ -13,19 +15,17 @@ export class MainNavComponent implements OnInit {
 
   constructor(    private qrService: QrService,
     private authenticationService:AuthenticationService,
-    private router: Router) { }
+    private router: Router,private groupService:GroupService) { }
+
+    user:AuthUser
 
   ngOnInit() {
   }
 
-  exitGroup()
-  {
-    this.qrService.logout();
-    this.router.navigate(['/scan']);
-  }
+
 
   logout(){
-    this.qrService.logout();
+    this.groupService.exitgroup().subscribe();
     this.authenticationService.logout();
     this.router.navigate(['/login']);
   }
