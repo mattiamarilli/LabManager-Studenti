@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
 
   compagni: Membro[];
   utensiliInUso: Utensile[];
+  user:AuthUser;
 
   object:any;
   updateToolAndMates(){
@@ -30,8 +31,13 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.groupService.getMembri().subscribe((data: Membro[]) => this.compagni = data);
-      this.classmateService.getInUseTools().subscribe((data:Utensile[])=>this.utensiliInUso = data);
+
+    this.user = JSON.parse(sessionStorage.getItem('currentUser'))
+    if (!this.user.id_gruppo)
+      this.router.navigate(['/scan']);
+    else{
+    this.groupService.getMembri().subscribe((data: Membro[]) => this.compagni = data);
+    this.classmateService.getInUseTools().subscribe((data:Utensile[])=>this.utensiliInUso = data);}
   }
 
   onFileChange(event) {
@@ -82,18 +88,18 @@ export class DashboardComponent implements OnInit {
   exitGroup()
   {
     this.groupService.exitgroup().subscribe();
-    /*this.authenticationService.renew().subscribe((data: AuthUser) => {
+    this.authenticationService.renew().subscribe((data: AuthUser) => {
 
         this.user = data;
-        //console.log(this.user);
+        console.log(this.user);
         sessionStorage.removeItem('currentUser');
         sessionStorage.setItem('currentUser', JSON.stringify(this.user));
         console.log(  sessionStorage.getItem('currentUser'))
-        // this.router.navigate(['/scan']);
+        this.router.navigate(['/scan']);
       }
     );
 
-    */
+
   }
 
 

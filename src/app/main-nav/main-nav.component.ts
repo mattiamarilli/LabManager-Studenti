@@ -17,7 +17,7 @@ export class MainNavComponent implements OnInit {
     private authenticationService:AuthenticationService,
     private router: Router,private groupService:GroupService) { }
 
-    user:AuthUser
+
 
   ngOnInit() {
   }
