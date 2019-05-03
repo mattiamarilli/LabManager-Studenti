@@ -43,6 +43,7 @@ export class ClassmatesService {
     return this.http.post(environment.apiUrl + `/user/categoria`, JSON.stringify({id_categoria}), { headers: headers }).pipe(
       map((response: any) =>
       {
+        console.log(response);
         if(response.code === 200)
           return true;
         else
@@ -65,5 +66,13 @@ export class ClassmatesService {
     });
     console.log('ciao2')
     return this.http.post(environment.apiUrl + `/user/utensile/release`, JSON.stringify({id_utensile}) ,{ headers: headers })
+  }
+
+  releaseAndFlagTool(id_utensile:number){
+    let headers = new HttpHeaders({
+      'token': this.user.token,
+    });
+    console.log('ciao2')
+    return this.http.post(environment.apiUrl + `/user/utensile/release`, JSON.stringify({id_utensile,segnala:true}) ,{ headers: headers })
   }
 }

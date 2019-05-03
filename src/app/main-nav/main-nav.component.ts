@@ -15,7 +15,8 @@ export class MainNavComponent implements OnInit {
 
   constructor(    private qrService: QrService,
     private authenticationService:AuthenticationService,
-    private router: Router,private groupService:GroupService) { }
+    private router: Router,
+                  private groupService:GroupService) { }
 
 
 

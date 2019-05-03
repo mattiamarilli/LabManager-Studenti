@@ -18,12 +18,15 @@
             <tr>
                 <th>Nome</th>
                 <th>Categoria</th>
+                <th>Azioni</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let utensile of utensiliInUso" (click)="restituisci(utensile.id_utensile)">
+            <tr *ngFor="let utensile of utensiliInUso" >
                 <td>{{utensile.nome}}</td>
-              <td>{{utensile.categoria}}</td>
+                <td>{{utensile.categoria}}</td>
+                <td><input type="button" (click)="restituisci(utensile.id_utensile)" value="Restituisci"><td><input type="button" (click)="segnala(utensile.id_utensile)" value="Segnala oggetto"></td></td>
+
             </tr>
         </tbody>
     </table>

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ClassmatesService} from '../services/classmates.service';
-import {Membro, Utensile, AuthUser} from '../model'
-import {GroupService} from '../services/group.service'
+import {Membro, Utensile, AuthUser} from '../model';
+import {GroupService} from '../services/group.service';
 import { QrService } from '../services/qr.service';
-import {AuthenticationService} from '../services/authentication.service'
+import {AuthenticationService} from '../services/authentication.service';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
@@ -16,67 +16,65 @@ export class DashboardComponent implements OnInit {
     private classmateService: ClassmatesService,
     private groupService: GroupService,
     private qrService: QrService,
-    private authenticationService:AuthenticationService,
+    private authenticationService: AuthenticationService,
     private router: Router
-    ) { }
+  ) { }
 
   compagni: Membro[];
   utensiliInUso: Utensile[];
-  user:AuthUser;
+  user: AuthUser;
 
-  object:any;
-  updateToolAndMates(){
+  object: any;
+  updateToolAndMates() {
     this.groupService.getMembri().subscribe((data: Membro[]) => this.compagni = data);
-    this.classmateService.getInUseTools().subscribe((data:Utensile[])=>this.utensiliInUso = data);
+    this.classmateService.getInUseTools().subscribe((data: Utensile[]) => this.utensiliInUso = data);
   }
 
   ngOnInit() {
 
-    this.user = JSON.parse(sessionStorage.getItem('currentUser'))
-    if (!this.user.id_gruppo)
+    this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+    if (!this.user.id_gruppo) {
       this.router.navigate(['/scan']);
-    else{
-    this.groupService.getMembri().subscribe((data: Membro[]) => this.compagni = data);
-    this.classmateService.getInUseTools().subscribe((data:Utensile[])=>this.utensiliInUso = data);}
+    } else {
+      this.groupService.getMembri().subscribe((data: Membro[]) => this.compagni = data);
+      this.classmateService.getInUseTools().subscribe((data: Utensile[]) => this.utensiliInUso = data); }
   }
 
   onFileChange(event) {
     const file = event.target.files[0];
+
+    if (!file) { return; }
+
     this.qrService.scanFile(file).subscribe(data => {
-     this.object = JSON.parse(data);
-     if (this.object.type === 'category') {
-       console.log(this.object.id)
-       this.classmateService.useToolByCategory(this.object.id).subscribe((done: boolean) =>
-         {
-           if(done === true) {
-             alert('Oggetto acquisito');
-             this.updateToolAndMates();
-           } else {
-             alert('Oggetto non disponibile');
-           }
-         }
-       );
-     } else {
-       console.log('ciao')
-       this.classmateService.useTool(this.object.id).subscribe((done: boolean) =>
-         {
-           if(done === true) {
-             alert('Oggetto acquisito');
-             this.updateToolAndMates();
-           } else {
-             alert('Oggetto non disponibile');
-           }
-         }
-       );
-     }
+      this.object = JSON.parse(data);
+      if (this.object.type === 'category') {
+        this.classmateService.useToolByCategory(this.object.id).subscribe((done: boolean) => {
+            console.log(done);
+            if (done) {
+              alert('Oggetto acquisito');
+              this.updateToolAndMates();
+            } else {
+              alert('Oggetto non disponibile');
+            }
+          }
+        );
+      } else {
+        console.log('ciao');
+        this.classmateService.useTool(this.object.id).subscribe((done: boolean) => {
+            if (done) {
+              alert('Oggetto acquisito');
+              this.updateToolAndMates();
+            } else {
+              alert('Oggetto non disponibile');
+            }
+          }
+        );
+      }
     });
   }
 
-  restituisci(id_utensile: number)
-  {
-    if(confirm('Sei sicuro di volerlo restituire'))
-
-    {
+  restituisci(id_utensile: number) {
+    if (confirm('Sei sicuro di volerlo restituire')) {
 
       console.log('ciao');
       this.classmateService.releaseTool(id_utensile).subscribe(() =>  this.updateToolAndMates());
@@ -84,9 +82,17 @@ export class DashboardComponent implements OnInit {
     }
 
   }
+  segnala(id_utensile: number) {
+    if (confirm('Sei sicuro di volerlo segnalare')) {
 
-  exitGroup()
-  {
+      console.log('ciao');
+      this.classmateService.releaseAndFlagTool(id_utensile).subscribe(() =>  this.updateToolAndMates());
+
+    }
+
+  }
+
+  exitGroup() {
     this.groupService.exitgroup().subscribe();
     this.authenticationService.renew().subscribe((data: AuthUser) => {
 
@@ -94,7 +100,7 @@ export class DashboardComponent implements OnInit {
         console.log(this.user);
         sessionStorage.removeItem('currentUser');
         sessionStorage.setItem('currentUser', JSON.stringify(this.user));
-        console.log(  sessionStorage.getItem('currentUser'))
+        console.log(  sessionStorage.getItem('currentUser'));
         this.router.navigate(['/scan']);
       }
     );
