@@ -33,3 +33,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Install BootStrap!
 follow this link guide: https://www.techiediaries.com/angular-bootstrap-ui/
 
+## JSON example for qrcode
+
+Ex. 1 {"type" : "tool", "id" : 1}
+Ex. 2 {"type" : "category", "id" : 2}
