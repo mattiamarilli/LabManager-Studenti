@@ -11,7 +11,6 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
-import {bootstrap} from "bootstrap";
 
 @NgModule({
   declarations: [
