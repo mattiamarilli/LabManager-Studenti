@@ -1,30 +1,19 @@
-<!--
-<nav class="navbar navbar-expand-lg navbar-dark static-top custom-bgcolor">
-  <img src="" width="50" height="50" src="assets/images/marconiHD.png" alt="QRMarconi - LOGO">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav navbar-right">
-
-      <a class="nav-item nav-link disabled"  (click)="logout()" href="#">Log Out</a>
-    </div>
-  </div>
-</nav>
--->
-<nav class="navbar navbar-expand-lg static-top custom-bgcolor">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000000;">
   <div class="container">
-    <a class="navbar-brand" href="/home">
-      <!--<img src="" src="assets/images/marconiHD.png" alt="QRMarconi - LOGO">-->
+    <a class="navbar-brand" routerLink="/">
+      <img src="assets/images/marconiHD.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      IPSIA GUGLIELMO MARCONI
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item" [routerLinkActive]="['active']">
-          <a class="nav-item nav-link disabled"  (click)="logout()" >Log Out</a>
-          <a class="nav-item nav-link disabled"  href="/user" >Modifica Password</a>
+          <a class="nav-item nav-link" routerLink="/user" >Modifica Password</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-item nav-link"  (click)="logout()" >Logout({{userString}})</a>
         </li>
       </ul>
     </div>

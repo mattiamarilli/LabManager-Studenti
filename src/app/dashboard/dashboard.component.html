@@ -1,63 +1,46 @@
 <app-main-nav></app-main-nav>
-
 <div class="container">
-  
-  
-  <div class="_table">
-  <h3 class="title"><span>Lista degli Utensili</span></h3>
-  <hr class="pageline">
-  <div class="selects">
-    <div id="input">
-        <div id="inputFile"><span (click)="uploader.click()" >Scansiona un utensile</span></div>
-        <input style="display: none" #uploader id="realInputFile" type="file" name="input" id="input" (change)="onFileChange($event)">
-    </div>
-	</div>
-  <hr class="pageline">
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Categoria</th>
-                <th>Azioni</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let utensile of utensiliInUso" >
-                <td>{{utensile.nome}}</td>
-                <td>{{utensile.categoria}}</td>
-                <td><input type="button" (click)="restituisci(utensile.id_utensile)" value="Restituisci"><td><input type="button" (click)="segnala(utensile.id_utensile)" value="Segnala oggetto"></td></td>
-
-            </tr>
-        </tbody>
-    </table>
+  <h3 class="title"><strong>Lista membri del gruppo</strong></h3>
+  <div id="input">
+      <div id="inputFile"><span (click)="uploader.click()" >Scansiona un utensile</span></div>
+      <input style="display: none" #uploader id="realInputFile" type="file" name="input" id="input" (change)="onFileChange($event)">
   </div>
-  
-  <hr class="margin">
-  
-  <div class="_table">
-  <h3 class="title"><span>Lista membri del gruppo</span></h3>
-  <hr class="pageline">
-  <div class="selects">
-          <button ><span (click)="updateToolAndMates()" >Aggiorna</span></button><br>
-        <button ><span (click)="exitGroup()" >Esci dal gruppo</span></button>
-		</div>
-  <hr class="pageline">
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Cognome</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let studenti of compagni">
-                <td>{{studenti.nome}}</td>
-                <td>{{studenti.cognome}}</td>
-            </tr>
-        </tbody>
-    </table>
-   </div>
-
+  <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+          <tr>
+              <th class="center_object">Nome</th>
+              <th class="center_object">Cognome</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let studenti of compagni">
+              <td class="center_object">{{studenti.nome}}</td>
+              <td class="center_object">{{studenti.cognome}}</td>
+          </tr>
+      </tbody>
+  </table>
+  <div>
+    <button class="btn btn-primary" (click)="updateToolAndMates()" >Aggiorna</button>
+    <button class="btn btn-danger" (click)="exitGroup()" >Esci dal gruppo</button>
+  </div>
+  <h3 class="title"><strong>Lista degli utensili</strong></h3>
+  <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+          <tr>
+              <th class="center_object">Nome</th>
+              <th class="center_object">Categoria</th>
+              <th class="center_object">Azioni</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let utensile of utensiliInUso" >
+              <td class="center_object">{{utensile.nome}}</td>
+              <td class="center_object">{{utensile.categoria}}</td>
+              <td class="center_object">
+                <input type="button" class="btn btn-success" (click)="restituisci(utensile.id_utensile)" value="Restituisci">
+                <input type="button" class="btn btn-warning" (click)="segnala(utensile.id_utensile)" value="Segnala oggetto">
+              </td>
+          </tr>
+      </tbody>
+  </table>
 </div>
-
-

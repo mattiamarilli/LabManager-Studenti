@@ -1,0 +1,17 @@
+.btn{
+  margin: 2.5px;
+}
+.center_object{
+   text-align: center;
+}
+.title{
+  margin:15px;
+  text-align: center;
+}
+#input{
+  background-color:lightblue;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding:20px;
+}

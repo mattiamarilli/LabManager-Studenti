@@ -1,26 +1,18 @@
 <app-main-nav></app-main-nav>
-
 <div class="container">
-
-  
-  <div class="_table">
-  <h3 class="title"><span>Membri della classe</span></h3>
-	<hr class="pageline">
-    <table>
-      <thead>
+  <h3 class="title"><strong>Membri della classe</strong></h3>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
       <tr>
-        <th>Nome</th>
-        <th>Cognome</th>
+        <th class="center_object">Nome</th>
+        <th class="center_object">Cognome</th>
       </tr>
-      </thead>
-      <tbody>
+    </thead>
+    <tbody>
       <tr *ngFor="let membro of membri" (click)="join(membro.id_studente)">
-        <th>{{membro.nome}}</th>
-        <th>{{membro.cognome}}</th>
+        <td class="center_object">{{membro.nome}}</td>
+        <td class="center_object">{{membro.cognome}}</td>
       </tr>
-      </tbody>
-    </table>
-    <hr>
-  </div>
-
+    </tbody>
+  </table>
 </div>

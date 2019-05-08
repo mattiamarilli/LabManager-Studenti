@@ -13,6 +13,9 @@ import {AuthUser} from '../model';
 })
 export class MainNavComponent implements OnInit {
 
+  userString:string = "";
+  authUser:AuthUser;
+
   constructor(    private qrService: QrService,
     private authenticationService:AuthenticationService,
     private router: Router,
@@ -21,6 +24,8 @@ export class MainNavComponent implements OnInit {
 
 
   ngOnInit() {
+    this.authUser = JSON.parse(sessionStorage.getItem('currentUser'));
+      this.userString += this.authUser.nome;
   }
 
 
