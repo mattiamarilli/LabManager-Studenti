@@ -56,6 +56,18 @@ export class AuthenticationService {
       });
       return this.http.post<AuthUser>(environment.apiUrl + '/user/renew', { headers: headers})
     }
+
+    modifyPassword(id_studente: number, odlpassword:string,newpassword:string){
+      let headers = new HttpHeaders({});
+      console.log("Old Password : " + odlpassword)
+      console.log("New Password : " + newpassword)
+      let body = {
+        'id': id_studente,
+        'oldpassword': odlpassword,
+        'newpassword': newpassword,
+      };
+      return this.http.post(environment.apiUrl +  `/user/password`, JSON.stringify(body) , { headers: headers });
+    }
     logout() {
         // remove user from local storage to log user out
         sessionStorage.removeItem('currentUser');
