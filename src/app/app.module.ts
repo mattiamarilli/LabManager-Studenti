@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { UserComponent } from './user/user.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     QrReaderComponent,
     DashboardComponent,
     MainNavComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
