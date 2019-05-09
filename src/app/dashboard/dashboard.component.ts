@@ -5,6 +5,7 @@ import {GroupService} from '../services/group.service';
 import { QrService } from '../services/qr.service';
 import {AuthenticationService} from '../services/authentication.service';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -17,7 +18,8 @@ export class DashboardComponent implements OnInit {
     private groupService: GroupService,
     private qrService: QrService,
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   compagni: Membro[];
@@ -33,7 +35,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
 
     this.user = JSON.parse(sessionStorage.getItem('currentUser'));
-    console.log(this.user)
     if (!this.user.id_gruppo) {
       this.router.navigate(['/scan']);
     } else {
@@ -52,10 +53,10 @@ export class DashboardComponent implements OnInit {
         this.classmateService.useToolByCategory(this.object.id).subscribe((done: boolean) => {
             console.log(done);
             if (done) {
-              alert('Oggetto acquisito');
+              this.toastr.success('Successo', 'Strumento acquisito');
               this.updateToolAndMates();
             } else {
-              alert('Oggetto non disponibile');
+              this.toastr.error('Oggetto non disponibile', 'Oops!');
             }
           }
         );
@@ -63,10 +64,10 @@ export class DashboardComponent implements OnInit {
         console.log('ciao');
         this.classmateService.useTool(this.object.id).subscribe((done: boolean) => {
             if (done) {
-              alert('Oggetto acquisito');
+              this.toastr.success('Successo', 'Strumento acquisito');
               this.updateToolAndMates();
             } else {
-              alert('Oggetto non disponibile');
+              this.toastr.error('Oggetto non disponibile', 'Oops!');
             }
           }
         );

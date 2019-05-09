@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~7.1.0",
+    "@angular/animations": "^7.1.4",
     "@angular/common": "~7.1.0",
     "@angular/compiler": "~7.1.0",
     "@angular/core": "~7.1.0",
@@ -25,8 +25,12 @@
     "bootstrap": "^4.0.0",
     "core-js": "^2.5.4",
     "ng2-qrcode-reader": "0.0.1",
+    "ng2-toastr": "^4.1.2",
+    "ng6-toastr-notifications": "^1.0.4",
+    "ngx-toastr": "^10.0.2",
     "qrcode-decoder": "^0.1.1",
     "rxjs": "~6.3.3",
+    "rxjs-compat": "^6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },

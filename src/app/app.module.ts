@@ -11,7 +11,8 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,8 @@ import { UserComponent } from './user/user.component';
     DashboardComponent,
     MainNavComponent,
     UserComponent,
+    
+    
 
   ],
   imports: [
@@ -28,7 +31,10 @@ import { UserComponent } from './user/user.component';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
+
   ],
   providers: [],
   bootstrap: [AppComponent]
