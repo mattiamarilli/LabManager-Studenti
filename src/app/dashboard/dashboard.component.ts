@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
 
     this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+    console.log(this.user)
     if (!this.user.id_gruppo) {
       this.router.navigate(['/scan']);
     } else {
@@ -93,16 +94,15 @@ export class DashboardComponent implements OnInit {
   }
 
   exitGroup() {
-    this.groupService.exitgroup().subscribe();
-    this.authenticationService.renew().subscribe((data: AuthUser) => {
-
-        this.user = data;
-        console.log(this.user);
-        sessionStorage.removeItem('currentUser');
+    this.groupService.exitgroup().subscribe(()=>
+    
+    {
+      this.user.id_gruppo = null;
+      sessionStorage.removeItem('currentUser');
         sessionStorage.setItem('currentUser', JSON.stringify(this.user));
-        console.log(  sessionStorage.getItem('currentUser'));
         this.router.navigate(['/scan']);
-      }
+    }
+    
     );
 
 

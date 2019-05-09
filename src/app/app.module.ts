@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { UserComponent } from './user/user.component';
     DashboardComponent,
     MainNavComponent,
     UserComponent,
+
   ],
   imports: [
     BrowserModule,

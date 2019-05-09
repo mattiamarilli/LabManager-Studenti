@@ -28,18 +28,25 @@ export class QrReaderComponent implements OnInit {
               private groupService: GroupService) {}
 
   ngOnInit() {
+
     this.user = JSON.parse(sessionStorage.getItem('currentUser'))
     if (this.user.id_gruppo)
       this.router.navigate(['/dashboard']);
-    this.classmatesService.getCompagni().subscribe((data: Membro[]) => this.membri = data);
+    else
+  {this.classmatesService.getCompagni().subscribe((data: Membro[]) => {
+        this.membri = data;
+        this.router.navigate(['/scan']);
+      });
+    }
   }
 
   join(id_studente:number)
   {
-    this.groupService.setMembro(id_studente).subscribe((user:AuthUser)=>
+    this.groupService.setMembro(id_studente).subscribe((group:any)=>
       {
+        this.user.id_gruppo = group.id_gruppo;
         sessionStorage.removeItem('currentUser');
-        sessionStorage.setItem('currentUser', JSON.stringify(user));
+        sessionStorage.setItem('currentUser', JSON.stringify(this.user));
         this.router.navigate(['/dashboard']);
       }
     );
