@@ -1,10 +1,31 @@
 <app-main-nav></app-main-nav>
 <div class="container">
+        <h3 class="title"><strong>Lista degli utensili</strong></h3>
+        <div id="input">
+              <div id="inputFile"><span (click)="uploader.click()" >Scansiona un utensile</span></div>
+              <input style="display: none" #uploader id="realInputFile" type="file" name="input" id="input" (change)="onFileChange($event)">
+          </div>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="center_object">Nome</th>
+                    <th class="center_object">Categoria</th>
+                    <th class="center_object">Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let utensile of utensiliInUso" >
+                    <td class="center_object">{{utensile.nome}}</td>
+                    <td class="center_object">{{utensile.categoria}}</td>
+                    <td class="center_object">
+                      <input type="button" class="btn btn-success" (click)="restituisci(utensile.id_utensile)" value="Restituisci">
+                      <input type="button" class="btn btn-warning" (click)="segnala(utensile.id_utensile)" value="Segnala">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
   <h3 class="title"><strong>Lista membri del gruppo</strong></h3>
-  <div id="input">
-      <div id="inputFile"><span (click)="uploader.click()" >Scansiona un utensile</span></div>
-      <input style="display: none" #uploader id="realInputFile" type="file" name="input" id="input" (change)="onFileChange($event)">
-  </div>
+  
   <table class="table table-bordered table-striped">
       <thead class="thead-dark">
           <tr>
@@ -23,24 +44,4 @@
     <button class="btn btn-primary" (click)="updateToolAndMates()" >Aggiorna</button>
     <button class="btn btn-danger" (click)="exitGroup()" >Esci dal gruppo</button>
   </div>
-  <h3 class="title"><strong>Lista degli utensili</strong></h3>
-  <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-          <tr>
-              <th class="center_object">Nome</th>
-              <th class="center_object">Categoria</th>
-              <th class="center_object">Azioni</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let utensile of utensiliInUso" >
-              <td class="center_object">{{utensile.nome}}</td>
-              <td class="center_object">{{utensile.categoria}}</td>
-              <td class="center_object">
-                <input type="button" class="btn btn-success" (click)="restituisci(utensile.id_utensile)" value="Restituisci">
-                <input type="button" class="btn btn-warning" (click)="segnala(utensile.id_utensile)" value="Segnala">
-              </td>
-          </tr>
-      </tbody>
-  </table>
 </div>

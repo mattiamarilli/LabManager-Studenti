@@ -12,10 +12,12 @@ export class UserComponent implements OnInit {
   user:AuthUser = new AuthUser;
   oldpassword:string;
   newpassword:string;
+  checkpassword:string;
   constructor(private authService: AuthenticationService,private toastr: ToastrService) { }
 
   modifyPassword(){
-    this.authService.modifyPassword(this.user.id,this.oldpassword,this.newpassword).subscribe((data:any)=>
+    if(this.newpassword == this.checkpassword)
+    {this.authService.modifyPassword(this.user.id,this.oldpassword,this.newpassword).subscribe((data:any)=>
        { 
          if(data.code == 200)
          this.toastr.success('Password Modificata', 'Successo');
@@ -25,6 +27,9 @@ export class UserComponent implements OnInit {
          this.toastr.error('Password non modificata', 'Errore');
        }
     );
+      }
+    else
+      this.toastr.error("Le nuove password non coincidono bibbi","Errore")
   }
 
   ngOnInit() {
