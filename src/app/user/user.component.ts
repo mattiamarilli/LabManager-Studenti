@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthUser} from '../model'
 import {AuthenticationService} from '../services/authentication.service'
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -11,10 +12,19 @@ export class UserComponent implements OnInit {
   user:AuthUser = new AuthUser;
   oldpassword:string;
   newpassword:string;
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService,private toastr: ToastrService) { }
 
   modifyPassword(){
-    this.authService.modifyPassword(this.user.id,this.oldpassword,this.newpassword).subscribe();
+    this.authService.modifyPassword(this.user.id,this.oldpassword,this.newpassword).subscribe((data:any)=>
+       { 
+         if(data.code == 200)
+         this.toastr.success('Password Modificata', 'Successo');
+         else if(data.code == 501)
+         this.toastr.error('Vecchia password non corretta', 'Errore');
+         else if(data.code == 500)
+         this.toastr.error('Password non modificata', 'Errore');
+       }
+    );
   }
 
   ngOnInit() {
