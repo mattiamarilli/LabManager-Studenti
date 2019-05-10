@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import {ClassmatesService} from '../services/classmates.service';
 import {Membro, Utensile, AuthUser} from '../model';
 import {GroupService} from '../services/group.service';
@@ -6,6 +6,8 @@ import { QrService } from '../services/qr.service';
 import {AuthenticationService} from '../services/authentication.service';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -19,12 +21,16 @@ export class DashboardComponent implements OnInit {
     private qrService: QrService,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private toastr: ToastrService
-  ) { }
+    private toastr: ToastrService,
+
+  ) { 
+
+   }
 
   compagni: Membro[];
   utensiliInUso: Utensile[];
   user: AuthUser;
+
 
   object: any;
   updateToolAndMates() {
