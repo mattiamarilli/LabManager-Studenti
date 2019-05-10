@@ -29,7 +29,7 @@ export class UserComponent implements OnInit {
     );
       }
     else
-      this.toastr.error("Le nuove password non coincidono bibbi","Errore")
+      this.toastr.error("Le nuove password non coincidono","Errore")
   }
 
   ngOnInit() {
