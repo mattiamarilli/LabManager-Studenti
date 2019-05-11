@@ -7,7 +7,7 @@ import {AuthenticationService} from '../services/authentication.service';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
-
+import {ConfirmDialogService} from '../services/confirm-dialog.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private router: Router,
     private toastr: ToastrService,
+
 
   ) { 
 

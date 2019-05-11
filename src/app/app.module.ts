@@ -13,7 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { ModalDialogModule } from 'ngx-modal-dialog';
+
+
 
 @NgModule({
   declarations: [
@@ -23,6 +24,8 @@ import { ModalDialogModule } from 'ngx-modal-dialog';
     DashboardComponent,
     MainNavComponent,
     UserComponent,
+
+    
     
     
 
@@ -35,10 +38,11 @@ import { ModalDialogModule } from 'ngx-modal-dialog';
     FormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    ModalDialogModule.forRoot()
+
+
 
   ],
-  providers: [],
+  providers: [   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
