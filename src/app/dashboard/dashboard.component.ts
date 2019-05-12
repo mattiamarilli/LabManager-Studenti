@@ -44,6 +44,7 @@ export class DashboardComponent implements OnInit {
     this.user = JSON.parse(sessionStorage.getItem('currentUser'));
     if (!this.user.id_gruppo) {
       this.router.navigate(['/scan']);
+      this.toastr.warning("Devi unirti o creare un gruppo per lavorare","Attenzione")
     } else {
       this.groupService.getMembri().subscribe((data: Membro[]) => this.compagni = data);
       this.classmateService.getInUseTools().subscribe((data: Utensile[]) => this.utensiliInUso = data); }
