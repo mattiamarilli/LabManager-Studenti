@@ -11,8 +11,8 @@ const routes: Routes = [
   { path: 'login',component:LoginComponent},
   { path: 'scan',component:QrReaderComponent,canActivate: [AuthGuard]},
   { path: '', redirectTo: '/scan', pathMatch: 'full'},
-  { path: 'user',component:UserComponent},
-  { path: 'dashboard', component: DashboardComponent},
+  { path: 'user',component:UserComponent,canActivate: [AuthGuard]},
+  { path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard]},
 
 
 ];

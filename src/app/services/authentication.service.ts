@@ -29,8 +29,10 @@ export class AuthenticationService {
         // @ts-ignore
       return this.http.post<AuthUser>(environment.apiUrl + "/user/auth", JSON.stringify(auth), { headers: headers}).pipe(
             map((user: AuthUser) => {
+              console.log(user.token);
              if (user.id) {
                 sessionStorage.setItem('currentUser', JSON.stringify(user));
+                console.log(sessionStorage.getItem('currentUser'));
                 this.currentUserSubject.next(user);
                 if(user.id_gruppo) {
                   return 1;
