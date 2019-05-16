@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  nginx:
+    build: ../
+    environment:
+      - NGINX_PORT=80
+    networks:
+      - proxy
+    container_name: studenti-nginx
+    expose:
+      - 80
+    labels:
+      - "traefik.port=80"
+      - 'traefik.backend=labmanager-studenti'
+      - 'traefik.enable=true'
+      - "traefik.frontend.rule=Host:marconi.demo.vivedo.me"
+
+networks:
+  proxy:
+    external: true
