@@ -1,4 +1,4 @@
-COMPOSE_PROJECT_NAME=labmanager-admin
+COMPOSE_PROJECT_NAME=labmanager-studenti
 
 COMPOSE=docker-compose --project-name=$(COMPOSE_PROJECT_NAME) -f docker/docker-compose.yml
 DEVCOMPOSE=$(COMPOSE)
