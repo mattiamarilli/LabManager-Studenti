@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { MainFooterComponent } from './main-footer/main-footer.component';
 
 
 
@@ -24,6 +25,7 @@ import { ToastrModule } from 'ngx-toastr';
     DashboardComponent,
     MainNavComponent,
     UserComponent,
+    MainFooterComponent,
 
     
     
